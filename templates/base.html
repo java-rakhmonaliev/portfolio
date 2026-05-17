@@ -24,20 +24,146 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
 
   <style>
+    /* ── Base ── */
     body { background: #0a0a0a; color: #e8e8e2; font-family: 'DM Sans', system-ui, sans-serif; }
     .border-subtle { border-color: rgba(255,255,255,0.07); }
     .text-muted  { color: rgba(255,255,255,0.40); }
     .text-faint  { color: rgba(255,255,255,0.25); }
-    .card { background: rgba(255,255,255,0.03); border: 0.5px solid rgba(255,255,255,0.08); border-radius: 16px; transition: background .2s, border-color .2s; }
-    .card:hover { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.14); }
-    .pill { font-size: 11px; color: rgba(255,255,255,0.45); background: rgba(255,255,255,0.05); border: 0.5px solid rgba(255,255,255,0.08); border-radius: 6px; padding: 3px 9px; display: inline-block; }
-    .btn-primary { background:#fff; color:#000; font-weight:500; border-radius:8px; padding:8px 18px; font-size:13px; transition:background .15s; display:inline-block; }
-    .btn-primary:hover { background:#ddd; }
-    .btn-ghost { background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.75); border:0.5px solid rgba(255,255,255,0.1); border-radius:8px; padding:8px 18px; font-size:13px; transition:all .15s; display:inline-block; }
-    .btn-ghost:hover { background:rgba(255,255,255,0.1); }
+
+    /* ── Page entrance — staggered fade-up on every direct child of main ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    main > * {
+      animation: fadeUp 0.45s cubic-bezier(0.4, 0, 0.2, 1) both;
+    }
+    main > *:nth-child(1) { animation-delay: 0.00s; }
+    main > *:nth-child(2) { animation-delay: 0.07s; }
+    main > *:nth-child(3) { animation-delay: 0.14s; }
+    main > *:nth-child(4) { animation-delay: 0.21s; }
+    main > *:nth-child(5) { animation-delay: 0.28s; }
+    main > *:nth-child(6) { animation-delay: 0.35s; }
+    main > *:nth-child(7) { animation-delay: 0.42s; }
+
+    /* ── Cards — lift + glow ── */
+    .card {
+      background: rgba(255,255,255,0.03);
+      border: 0.5px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      transition:
+        background  0.22s ease,
+        border-color 0.22s ease,
+        transform   0.22s cubic-bezier(0.4, 0, 0.2, 1),
+        box-shadow  0.22s ease;
+    }
+    .card:hover {
+      background: rgba(255,255,255,0.055);
+      border-color: rgba(255,255,255,0.15);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 36px rgba(0,0,0,0.4);
+    }
+    .card:active { transform: translateY(-1px); }
+
+    /* ── Skill / tag pills — subtle lift ── */
+    .pill {
+      font-size: 11px;
+      color: rgba(255,255,255,0.45);
+      background: rgba(255,255,255,0.05);
+      border: 0.5px solid rgba(255,255,255,0.08);
+      border-radius: 6px;
+      padding: 3px 9px;
+      display: inline-block;
+      transition:
+        background   0.17s ease,
+        border-color 0.17s ease,
+        color        0.17s ease,
+        transform    0.17s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .pill:hover {
+      background: rgba(255,255,255,0.10);
+      border-color: rgba(255,255,255,0.18);
+      color: rgba(255,255,255,0.80);
+      transform: translateY(-1px);
+    }
+
+    /* ── Primary button ── */
+    .btn-primary {
+      background: #fff;
+      color: #000;
+      font-weight: 500;
+      border-radius: 8px;
+      padding: 8px 18px;
+      font-size: 13px;
+      display: inline-block;
+      transition:
+        background 0.15s ease,
+        transform  0.18s cubic-bezier(0.4, 0, 0.2, 1),
+        box-shadow 0.18s ease;
+    }
+    .btn-primary:hover {
+      background: #e0e0e0;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255,255,255,0.10);
+    }
+    .btn-primary:active { transform: translateY(0); box-shadow: none; }
+
+    /* ── Ghost button ── */
+    .btn-ghost {
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.75);
+      border: 0.5px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      padding: 8px 18px;
+      font-size: 13px;
+      display: inline-block;
+      transition:
+        background   0.15s ease,
+        border-color 0.15s ease,
+        color        0.15s ease,
+        transform    0.18s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .btn-ghost:hover {
+      background: rgba(255,255,255,0.11);
+      border-color: rgba(255,255,255,0.18);
+      color: rgba(255,255,255,0.95);
+      transform: translateY(-2px);
+    }
+    .btn-ghost:active { transform: translateY(0); }
+
+    /* ── Connect links (GitHub, LinkedIn, Telegram…) ── */
+    .connect-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.45);
+      border: 0.5px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.04);
+      border-radius: 8px;
+      padding: 8px 16px;
+      text-decoration: none;
+      transition:
+        background   0.18s ease,
+        border-color 0.18s ease,
+        color        0.18s ease,
+        transform    0.18s cubic-bezier(0.4, 0, 0.2, 1),
+        box-shadow   0.18s ease;
+    }
+    .connect-link:hover {
+      background: rgba(255,255,255,0.09);
+      border-color: rgba(255,255,255,0.18);
+      color: rgba(255,255,255,0.90);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    }
+    .connect-link:active { transform: translateY(0); }
+
+    /* ── Section ── */
     .section-label { font-size:11px; font-weight:500; color:rgba(255,255,255,0.3); letter-spacing:.08em; text-transform:uppercase; margin-bottom:20px; }
     .section-divider { border-top: 0.5px solid rgba(255,255,255,0.07); padding-top: 40px; margin-top: 40px; }
-    /* Blog / prose styles */
+
+    /* ── Blog / prose ── */
     .prose-dark h2 { font-size:1.25rem; font-weight:500; color:#fff; margin:2rem 0 .75rem; }
     .prose-dark h3 { font-size:1.05rem; font-weight:500; color:#e8e8e2; margin:1.5rem 0 .5rem; }
     .prose-dark p  { color:rgba(255,255,255,0.6); line-height:1.75; margin-bottom:1rem; }
@@ -47,6 +173,39 @@
     .prose-dark pre code { background:none; padding:0; }
     .prose-dark ul  { list-style:disc; padding-left:1.25rem; color:rgba(255,255,255,0.6); margin-bottom:1rem; }
     .prose-dark li  { margin-bottom:.35rem; line-height:1.7; }
+
+    /* ── Sliding pill nav ── */
+    .nav-links {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 2px;
+    }
+    .nav-pill {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 28px;
+      background: rgba(255,255,255,0.07);
+      border: 0.5px solid rgba(255,255,255,0.10);
+      border-radius: 7px;
+      pointer-events: none;
+      opacity: 0;
+      transition:
+        left    0.28s cubic-bezier(0.4, 0, 0.2, 1),
+        width   0.28s cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 0.15s ease;
+    }
+    .nav-links a {
+      position: relative;
+      z-index: 1;
+      padding: 4px 10px;
+      border-radius: 7px;
+      transition: color 0.15s ease;
+    }
+    .nav-links a.nav-active {
+      color: rgba(255,255,255,0.90) !important;
+    }
   </style>
 
   {% block extra_head %}{% endblock %}
@@ -57,11 +216,21 @@
   <header class="border-b border-subtle">
     <nav class="max-w-2xl mx-auto px-6 py-5 flex justify-between items-center">
       <a href="{% url 'home' %}" class="text-sm font-medium text-white tracking-tight">JR</a>
-      <div class="flex gap-6">
-        <a href="{% url 'home' %}#projects" class="text-xs text-muted hover:text-white transition-colors duration-150">Projects</a>
-        <a href="{% url 'home' %}#work"     class="text-xs text-muted hover:text-white transition-colors duration-150">Work</a>
-        <a href="{% url 'blog_list' %}"     class="text-xs text-muted hover:text-white transition-colors duration-150">Blog</a>
-        <a href="{% url 'home' %}#contact"  class="text-xs text-muted hover:text-white transition-colors duration-150">Contact</a>
+
+      <div class="nav-links" id="navLinks">
+        <div class="nav-pill" id="navPill"></div>
+        <a href="{% url 'home' %}#projects"
+           class="text-xs text-muted
+             {% if request.resolver_match.url_name == 'home' %}nav-active{% endif %}">
+          Projects
+        </a>
+        <a href="{% url 'home' %}#work" class="text-xs text-muted">Work</a>
+        <a href="{% url 'blog_list' %}"
+           class="text-xs text-muted
+             {% if request.resolver_match.url_name == 'blog_list' or request.resolver_match.url_name == 'blog_detail' %}nav-active{% endif %}">
+          Blog
+        </a>
+        <a href="{% url 'home' %}#contact" class="text-xs text-muted">Contact</a>
       </div>
     </nav>
   </header>
@@ -70,9 +239,33 @@
     {% block content %}{% endblock %}
   </main>
 
-<footer class="max-w-2xl mx-auto px-6 py-10 mt-8 border-t border-subtle text-center text-xs text-faint">
-  &copy; 2026 Javokhirbek Rakhmonaliev
-</footer>
+  <footer class="max-w-2xl mx-auto px-6 py-10 mt-8 border-t border-subtle text-center text-xs text-faint">
+    &copy; 2026 Javokhirbek Rakhmonaliev
+  </footer>
+
+  <script>
+    (function () {
+      const nav   = document.getElementById('navLinks');
+      const pill  = document.getElementById('navPill');
+      const links = nav.querySelectorAll('a');
+
+      function moveTo(el) {
+        pill.style.left    = el.offsetLeft + 'px';
+        pill.style.width   = el.offsetWidth + 'px';
+        pill.style.opacity = '1';
+      }
+
+      function resetToActive() {
+        const active = nav.querySelector('.nav-active');
+        if (active) moveTo(active);
+        else pill.style.opacity = '0';
+      }
+
+      links.forEach(link => link.addEventListener('mouseenter', () => moveTo(link)));
+      nav.addEventListener('mouseleave', resetToActive);
+      resetToActive();
+    })();
+  </script>
 
 </body>
 </html>

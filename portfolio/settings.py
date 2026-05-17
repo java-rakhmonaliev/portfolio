@@ -53,8 +53,9 @@ TEMPLATES = [
 WSGI_APPLICATION = "portfolio.wsgi.application"
 
 
-if os.getenv("DATABASE_URL") or config("DB_HOST", default="") != "":
-    # Production — use Postgres
+USE_SQLITE = config("USE_SQLITE", default=False, cast=bool)
+
+if not USE_SQLITE:
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.postgresql",
@@ -66,14 +67,12 @@ if os.getenv("DATABASE_URL") or config("DB_HOST", default="") != "":
         }
     }
 else:
-    # Local dev — use SQLite, no c needed
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
             "NAME": BASE_DIR / "db.sqlite3",
         }
     }
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"
