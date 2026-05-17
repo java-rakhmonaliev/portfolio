@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
+    path("java-rakhmonaliev-admin/", admin.site.urls),
     path("", include("core.urls")),
     path("blog/", include("blog.urls")),
 ] + static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS[0])
