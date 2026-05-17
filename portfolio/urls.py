@@ -5,6 +5,6 @@ from django.urls import path, include
 
 urlpatterns = [
     path("java-rakhmonaliev-admin/", admin.site.urls),
-    path("", include("core.urls")),
+    path("", include("core.urlsg")),
     path("blog/", include("blog.urls")),
 ] + static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS[0])
