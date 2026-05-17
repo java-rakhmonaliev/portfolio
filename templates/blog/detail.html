@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}{{ post.title }} — Javokhirbek Rakhmonaliev{% endblock %}
+{% block meta_description %}{{ post.excerpt }}{% endblock %}
+
+{% block content %}
+
+<article class="py-14">
+
+  <a href="{% url 'blog_list' %}" class="text-xs text-muted hover:text-white transition-colors mb-10 inline-block">
+    ← All posts
+  </a>
+
+  <header class="mb-10">
+    <p class="text-xs text-faint mb-3">{{ post.published_at|date:"F j, Y" }}</p>
+    <h1 class="text-3xl font-medium tracking-tight text-white leading-snug mb-3">
+      {{ post.title }}
+    </h1>
+    <p class="text-sm text-muted">{{ post.excerpt }}</p>
+  </header>
+
+  <div class="prose-dark border-t border-subtle pt-8">
+    {{ post.body_as_html|safe }}
+  </div>
+
+</article>
+
+{% endblock %}

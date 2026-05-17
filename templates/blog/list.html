@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Blog — Javokhirbek Rakhmonaliev{% endblock %}
+
+{% block content %}
+
+<section class="py-16">
+  <h1 class="text-3xl font-medium tracking-tight text-white mb-4">Blog</h1>
+  <p class="text-sm text-muted leading-relaxed">
+    DevOps engineer,<br />
+    backend developer,<br />
+    teacher,<br />
+    dropout — twice.<br />
+    19.<br /><br />
+    Writing down how I think now so I can see how wrong I was later.
+  </p>
+</section>
+
+<section class="border-t border-subtle">
+  {% if posts %}
+    <div class="divide-y divide-white/5">
+      {% for post in posts %}
+        <a href="{% url 'blog_detail' post.slug %}"
+           class="flex justify-between items-start gap-6 py-5 group no-underline">
+          <div>
+            <p class="text-sm font-medium text-white group-hover:text-white/80 transition-colors mb-1">
+              {{ post.title }}
+            </p>
+            <p class="text-xs text-muted leading-relaxed">{{ post.excerpt }}</p>
+          </div>
+          <p class="text-xs text-faint whitespace-nowrap shrink-0 pt-0.5">
+            {{ post.published_at|date:"M j, Y" }}
+          </p>
+        </a>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="text-sm text-muted py-10 text-center">First post coming soon.</p>
+  {% endif %}
+</section>
+
+{% endblock %}

@@ -1,0 +1,250 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- ─── Hero ─────────────────────────────────────────────── -->
+<section class="py-16">
+  <div class="inline-flex items-center gap-2 text-xs text-muted bg-white/5 border border-white/10 rounded-full px-3 py-1 mb-6">
+    <span class="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"></span>
+    Available for remote roles
+  </div>
+
+  <h1 class="text-4xl font-medium tracking-tight text-white leading-tight mb-4">
+    Javokhirbek<br />Rakhmonaliev
+  </h1>
+
+  <p class="text-base leading-relaxed text-muted max-w-lg">
+    DevOps &amp; backend engineer based in <span class="text-white/70">Uzbekistan</span>.
+    Shipped a live AI-powered product on AWS solo at 19.
+    Currently teaching Python while building in public.
+  </p>
+
+  <div class="flex gap-3 mt-7">
+    <a href="/static/resume.pdf" class="btn-primary">View resume</a>
+    <a href="https://github.com/java-rakhmonaliev" target="_blank" rel="noopener" class="btn-ghost">GitHub →</a>
+  </div>
+</section>
+
+<!-- ─── Projects ──────────────────────────────────────────── -->
+<section id="projects" class="section-divider">
+  <p class="section-label">Projects</p>
+
+  <!-- Tayyib.io -->
+  <div class="card p-5 mb-3">
+    <div class="flex justify-between items-start mb-2">
+      <span class="text-sm font-medium text-white">Tayyib.io — Halal Ingredient Checker</span>
+      <a href="http://13.217.178.63" target="_blank" rel="noopener"
+         class="inline-flex items-center gap-1.5 text-xs text-green-400 bg-green-400/10 border border-green-400/20 rounded-full px-2 py-0.5 hover:bg-green-400/20 transition-colors shrink-0 ml-3">
+        <span class="w-1.5 h-1.5 rounded-full bg-green-400"></span>live
+      </a>
+    </div>
+    <p class="text-xs text-muted leading-relaxed mb-3">
+      Sole engineer. Ingredient checker with per-madhab ruling flags, barcode lookup (3M+ products),
+      and AI fallback via Groq Llama 4 Vision. Full IaC on AWS with Terraform, zero-downtime
+      CI/CD, and a Flutter companion app on iOS &amp; Android.
+    </p>
+    <div class="flex flex-wrap gap-1.5 mb-3">
+      {% for tag in tayyib_tags %}
+        <span class="pill">{{ tag }}</span>
+      {% endfor %}
+    </div>
+    <div class="flex gap-3 pt-2 border-t border-white/5">
+      <a href="https://github.com/java-rakhmonaliev/tayyib.io" target="_blank" rel="noopener"
+         class="text-xs text-muted hover:text-white transition-colors">GitHub →</a>
+      <a href="http://13.217.178.63" target="_blank" rel="noopener"
+         class="text-xs text-muted hover:text-white transition-colors">13.217.178.63 →</a>
+    </div>
+  </div>
+
+  <!-- Tayyib Flutter App -->
+  <div class="card p-5 mb-3">
+    <div class="flex justify-between items-start mb-2">
+      <span class="text-sm font-medium text-white">Tayyib — Flutter Mobile App</span>
+      <span class="inline-flex items-center gap-1.5 text-xs text-white/40 bg-white/5 border border-white/8 rounded-full px-2 py-0.5 shrink-0 ml-3">
+        iOS &amp; Android
+      </span>
+    </div>
+    <p class="text-xs text-muted leading-relaxed mb-3">
+      Official mobile app for Tayyib.io. Text analysis, real-time barcode scanning, and AI photo label detection —
+      all with full Hanafi, Maliki, Shafi'i, and Hanbali rulings. JWT auth, madhab switcher,
+      dark-first design system built on Space Grotesk.
+    </p>
+    <div class="flex flex-wrap gap-1.5 mb-3">
+      {% for tag in tayyib_app_tags %}
+        <span class="pill">{{ tag }}</span>
+      {% endfor %}
+    </div>
+    <div class="flex gap-3 pt-2 border-t border-white/5">
+      <a href="https://github.com/java-rakhmonaliev/tayyib-app" target="_blank" rel="noopener"
+         class="text-xs text-muted hover:text-white transition-colors">GitHub →</a>
+    </div>
+  </div>
+
+  <!-- Varoq -->
+  <div class="card p-5">
+    <div class="flex justify-between items-start mb-2">
+      <span class="text-sm font-medium text-white">Varoq — Book Tracker</span>
+      <span class="text-xs text-faint shrink-0 ml-3">In development</span>
+    </div>
+    <p class="text-xs text-muted leading-relaxed mb-3">
+      Solo-built REST API with ISBN barcode scan, reading progress tracking, star ratings,
+      and a friends activity feed. Phone OTP auth via Telegram bot. Fully normalised schema;
+      Flutter client in progress.
+    </p>
+    <div class="flex flex-wrap gap-1.5 mb-3">
+      {% for tag in varoq_tags %}
+        <span class="pill">{{ tag }}</span>
+      {% endfor %}
+    </div>
+    <div class="flex gap-3 pt-2 border-t border-white/5">
+      <a href="https://github.com/java-rakhmonaliev/varoq" target="_blank" rel="noopener"
+         class="text-xs text-muted hover:text-white transition-colors">GitHub →</a>
+    </div>
+  </div>
+
+</section>
+
+<!-- ─── Work ──────────────────────────────────────────────── -->
+<section id="work" class="section-divider">
+  <p class="section-label">Work</p>
+
+  <div class="divide-y divide-white/5">
+
+    <div class="py-4 grid grid-cols-[1fr_auto] gap-x-4">
+      <div>
+        <p class="text-sm font-medium text-white">Python Backend Instructor</p>
+        <p class="text-xs text-muted mt-0.5">IT Center Yaypan</p>
+        <ul class="mt-2 space-y-1">
+          <li class="text-xs text-muted pl-3 relative before:content-['—'] before:absolute before:left-0 before:text-white/20">
+            Teaching Django, DRF &amp; PostgreSQL to 15+ students per cohort
+          </li>
+          <li class="text-xs text-muted pl-3 relative before:content-['—'] before:absolute before:left-0 before:text-white/20">
+            Mentoring on Git workflows, API design, testing, and deployment best practices
+          </li>
+        </ul>
+      </div>
+      <p class="text-xs text-faint text-right whitespace-nowrap pt-0.5">Apr 2026 — Present</p>
+    </div>
+
+    <div class="py-4 grid grid-cols-[1fr_auto] gap-x-4">
+      <div>
+        <p class="text-sm font-medium text-white">Jr. DevOps Engineer</p>
+        <p class="text-xs text-muted mt-0.5">Ipotekabank OTP Group</p>
+        <ul class="mt-2 space-y-1">
+          <li class="text-xs text-muted pl-3 relative before:content-['—'] before:absolute before:left-0 before:text-white/20">
+            Built HA Kubernetes clusters via Kubespray on RHEL with senior engineers from Hungary
+          </li>
+          <li class="text-xs text-muted pl-3 relative before:content-['—'] before:absolute before:left-0 before:text-white/20">
+            Managed CI/CD (GitLab CI, Jenkins) for internal banking infrastructure
+          </li>
+          <li class="text-xs text-muted pl-3 relative before:content-['—'] before:absolute before:left-0 before:text-white/20">
+            Provisioned cloud infra with Terraform; enforced RBAC for 10+ team members
+          </li>
+        </ul>
+      </div>
+      <p class="text-xs text-faint text-right whitespace-nowrap pt-0.5">Jun – Oct 2024</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── Skills ────────────────────────────────────────────── -->
+<section id="skills" class="section-divider">
+  <p class="section-label">Skills</p>
+
+  <div class="grid grid-cols-2 gap-5">
+    {% for group, items in skills.items %}
+      <div>
+        <p class="text-xs text-faint mb-2">{{ group }}</p>
+        <div class="flex flex-wrap gap-1.5">
+          {% for s in items %}
+            <span class="pill">{{ s }}</span>
+          {% endfor %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- ─── Certifications ────────────────────────────────────── -->
+<section class="section-divider">
+  <p class="section-label">Certifications</p>
+  <div class="divide-y divide-white/5">
+
+    <a href="https://www.coursera.org/account/accomplishments/specialization/BD6AHL9EAWTN"
+       target="_blank" rel="noopener"
+       class="flex justify-between items-center py-3 group no-underline">
+      <div>
+        <p class="text-sm text-white/70 group-hover:text-white transition-colors">IBM Applied DevOps Engineering Professional Certificate</p>
+        <p class="text-xs text-faint mt-0.5">IBM · Coursera</p>
+      </div>
+      <span class="text-xs text-faint group-hover:text-white/40 transition-colors ml-4 shrink-0">Dec 2023 →</span>
+    </a>
+
+    <a href="https://www.coursera.org/account/accomplishments/specialization/H3APLLKU537B"
+       target="_blank" rel="noopener"
+       class="flex justify-between items-center py-3 group no-underline">
+      <div>
+        <p class="text-sm text-white/70 group-hover:text-white transition-colors">Meta Backend Developer Professional Certificate</p>
+        <p class="text-xs text-faint mt-0.5">Meta · Coursera · ID H3APLLKU537B</p>
+      </div>
+      <span class="text-xs text-faint group-hover:text-white/40 transition-colors ml-4 shrink-0">Nov 2023 →</span>
+    </a>
+
+    <a href="https://www.coursera.org/account/accomplishments/specialization/BD6AHL9EAWTN"
+       target="_blank" rel="noopener"
+       class="flex justify-between items-center py-3 group no-underline">
+      <div>
+        <p class="text-sm text-white/70 group-hover:text-white transition-colors">DevOps on AWS Specialization</p>
+        <p class="text-xs text-faint mt-0.5">Amazon Web Services · Coursera</p>
+      </div>
+      <span class="text-xs text-faint group-hover:text-white/40 transition-colors ml-4 shrink-0">Mar 2024 →</span>
+    </a>
+
+    <div class="flex justify-between items-center py-3">
+      <div>
+        <p class="text-sm text-white/70">Pearson BTEC International Level 3 Foundation Diploma</p>
+        <p class="text-xs text-faint mt-0.5">Pearson · ID SF65590</p>
+      </div>
+      <span class="text-xs text-faint ml-4 shrink-0">Nov 2024</span>
+    </div>
+
+    <div class="flex justify-between items-center py-3">
+      <div>
+        <p class="text-sm text-white/70">IELTS 6.5</p>
+        <p class="text-xs text-faint mt-0.5">IDP Education Ltd · ID 23UZ018395RAXJ004A · Expires Aug 2025</p>
+      </div>
+      <span class="text-xs text-faint ml-4 shrink-0">Aug 2023</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── Contact ───────────────────────────────────────────── -->
+<section id="contact" class="section-divider pb-4">
+  <p class="section-label">Connect</p>
+  <div class="flex flex-wrap gap-3">
+    <a href="https://github.com/java-rakhmonaliev" target="_blank" rel="noopener"
+       class="inline-flex items-center gap-2 text-xs text-muted hover:text-white border border-white/8 hover:border-white/15 bg-white/4 hover:bg-white/7 rounded-lg px-4 py-2.5 transition-all duration-150">
+      GitHub
+    </a>
+    <a href="https://linkedin.com/in/jawokhirdev" target="_blank" rel="noopener"
+       class="inline-flex items-center gap-2 text-xs text-muted hover:text-white border border-white/8 hover:border-white/15 bg-white/4 hover:bg-white/7 rounded-lg px-4 py-2.5 transition-all duration-150">
+      LinkedIn
+    </a>
+    <a href="https://t.me/jawokhir" target="_blank" rel="noopener"
+       class="inline-flex items-center gap-2 text-xs text-muted hover:text-white border border-white/8 hover:border-white/15 bg-white/4 hover:bg-white/7 rounded-lg px-4 py-2.5 transition-all duration-150">
+      Telegram
+    </a>
+    <a href="mailto:java.rakhmonaliev@gmail.com"
+       class="inline-flex items-center gap-2 text-xs text-muted hover:text-white border border-white/8 hover:border-white/15 bg-white/4 hover:bg-white/7 rounded-lg px-4 py-2.5 transition-all duration-150">
+      java.rakhmonaliev@gmail.com
+    </a>
+    <a href="tel:+998900586855"
+       class="inline-flex items-center gap-2 text-xs text-muted hover:text-white border border-white/8 hover:border-white/15 bg-white/4 hover:bg-white/7 rounded-lg px-4 py-2.5 transition-all duration-150">
+      +998 90 058 68 55
+    </a>
+  </div>
+</section>
+
+{% endblock %}

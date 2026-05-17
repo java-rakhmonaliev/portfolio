@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}Javokhirbek Rakhmonaliev{% endblock %}</title>
+  <meta name="description" content="{% block meta_description %}DevOps & backend engineer from Uzbekistan.{% endblock %}" />
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['DM Sans', 'system-ui', 'sans-serif'] },
+        }
+      }
+    }
+  </script>
+
+  <!-- Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+
+  <style>
+    body { background: #0a0a0a; color: #e8e8e2; font-family: 'DM Sans', system-ui, sans-serif; }
+    .border-subtle { border-color: rgba(255,255,255,0.07); }
+    .text-muted  { color: rgba(255,255,255,0.40); }
+    .text-faint  { color: rgba(255,255,255,0.25); }
+    .card { background: rgba(255,255,255,0.03); border: 0.5px solid rgba(255,255,255,0.08); border-radius: 16px; transition: background .2s, border-color .2s; }
+    .card:hover { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.14); }
+    .pill { font-size: 11px; color: rgba(255,255,255,0.45); background: rgba(255,255,255,0.05); border: 0.5px solid rgba(255,255,255,0.08); border-radius: 6px; padding: 3px 9px; display: inline-block; }
+    .btn-primary { background:#fff; color:#000; font-weight:500; border-radius:8px; padding:8px 18px; font-size:13px; transition:background .15s; display:inline-block; }
+    .btn-primary:hover { background:#ddd; }
+    .btn-ghost { background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.75); border:0.5px solid rgba(255,255,255,0.1); border-radius:8px; padding:8px 18px; font-size:13px; transition:all .15s; display:inline-block; }
+    .btn-ghost:hover { background:rgba(255,255,255,0.1); }
+    .section-label { font-size:11px; font-weight:500; color:rgba(255,255,255,0.3); letter-spacing:.08em; text-transform:uppercase; margin-bottom:20px; }
+    .section-divider { border-top: 0.5px solid rgba(255,255,255,0.07); padding-top: 40px; margin-top: 40px; }
+    /* Blog / prose styles */
+    .prose-dark h2 { font-size:1.25rem; font-weight:500; color:#fff; margin:2rem 0 .75rem; }
+    .prose-dark h3 { font-size:1.05rem; font-weight:500; color:#e8e8e2; margin:1.5rem 0 .5rem; }
+    .prose-dark p  { color:rgba(255,255,255,0.6); line-height:1.75; margin-bottom:1rem; }
+    .prose-dark a  { color:rgba(255,255,255,0.75); text-decoration:underline; text-underline-offset:3px; }
+    .prose-dark code { background:rgba(255,255,255,0.07); border-radius:4px; padding:2px 6px; font-size:13px; }
+    .prose-dark pre { background:rgba(255,255,255,0.05); border:0.5px solid rgba(255,255,255,0.08); border-radius:12px; padding:1.25rem; overflow-x:auto; margin:1.25rem 0; }
+    .prose-dark pre code { background:none; padding:0; }
+    .prose-dark ul  { list-style:disc; padding-left:1.25rem; color:rgba(255,255,255,0.6); margin-bottom:1rem; }
+    .prose-dark li  { margin-bottom:.35rem; line-height:1.7; }
+  </style>
+
+  {% block extra_head %}{% endblock %}
+</head>
+<body class="min-h-screen">
+
+  <!-- Nav -->
+  <header class="border-b border-subtle">
+    <nav class="max-w-2xl mx-auto px-6 py-5 flex justify-between items-center">
+      <a href="{% url 'home' %}" class="text-sm font-medium text-white tracking-tight">JR</a>
+      <div class="flex gap-6">
+        <a href="{% url 'home' %}#projects" class="text-xs text-muted hover:text-white transition-colors duration-150">Projects</a>
+        <a href="{% url 'home' %}#work"     class="text-xs text-muted hover:text-white transition-colors duration-150">Work</a>
+        <a href="{% url 'blog_list' %}"     class="text-xs text-muted hover:text-white transition-colors duration-150">Blog</a>
+        <a href="{% url 'home' %}#contact"  class="text-xs text-muted hover:text-white transition-colors duration-150">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="max-w-2xl mx-auto px-6">
+    {% block content %}{% endblock %}
+  </main>
+
+<footer class="max-w-2xl mx-auto px-6 py-10 mt-8 border-t border-subtle text-center text-xs text-faint">
+  &copy; 2026 Javokhirbek Rakhmonaliev
+</footer>
+
+</body>
+</html>
