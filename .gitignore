@@ -1,10 +1,14 @@
 .env
 __pycache__/
 *.pyc
-*.pyo
 .DS_Store
 staticfiles/
 db.sqlite3
 *.egg-info/
 .venv/
 venv/
+infra/terraform.tfvars
+infra/.terraform/
+infra/*.tfstate
+infra/*.tfstate.backup
+infra/.terraform.lock.hcl
