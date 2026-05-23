@@ -25,7 +25,7 @@
 
   <style>
     /* ── Base ── */
-    body { background: #0a0a0a; color: #e8e8e2; font-family: 'DM Sans', system-ui, sans-serif; }
+    body { background: #0a0a0a; color: #e8e8e2; font-family: 'DM Sans', system-ui, sans-serif; font-size: 18px; }
     .border-subtle { border-color: rgba(255,255,255,0.07); }
     .text-muted  { color: rgba(255,255,255,0.40); }
     .text-faint  { color: rgba(255,255,255,0.25); }
@@ -214,7 +214,7 @@
 
   <!-- Nav -->
   <header class="border-b border-subtle">
-    <nav class="max-w-2xl mx-auto px-6 py-5 flex justify-between items-center">
+    <nav class="max-w-3xl mx-auto px-6 py-5 flex justify-between items-center">
       <a href="{% url 'home' %}" class="text-sm font-medium text-white tracking-tight">JR</a>
 
       <div class="nav-links" id="navLinks">
@@ -235,11 +235,11 @@
     </nav>
   </header>
 
-  <main class="max-w-2xl mx-auto px-6">
+  <main class="max-w-3xl mx-auto px-6">
     {% block content %}{% endblock %}
   </main>
 
-  <footer class="max-w-2xl mx-auto px-6 py-10 mt-8 border-t border-subtle text-center text-xs text-faint">
+  <footer class="max-w-3xl mx-auto px-6 py-10 mt-8 border-t border-subtle text-center text-xs text-faint">
     &copy; 2026 Javokhirbek Rakhmonaliev
   </footer>
 
