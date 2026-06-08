@@ -12,12 +12,18 @@ provider "aws" {
 }
 
 # ─── Variables ────────────────────────────────────────────────
-variable "aws_region"   { default = "eu-central-1" }
-variable "db_password"  { sensitive = true }
-variable "secret_key"   { sensitive = true }
+variable "aws_region" { default = "eu-central-1" }
+variable "db_password" { sensitive = true }
+variable "secret_key" { sensitive = true }
 
 locals {
   name = "portfolio"
+}
+
+# ─── Key Pair ─────────────────────────────────────────────────
+resource "aws_key_pair" "portfolio" {
+  key_name   = "portfolio-key"
+  public_key = file("~/.ssh/id_ed25519.pub")
 }
 
 # ─── Security Group ───────────────────────────────────────────
@@ -47,10 +53,10 @@ resource "aws_security_group" "portfolio" {
   }
 
   ingress {
-    from_port   = 5432
-    to_port     = 5432
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    from_port = 5432
+    to_port   = 5432
+    protocol  = "tcp"
+    self      = true
   }
 
   egress {
@@ -68,7 +74,7 @@ resource "aws_instance" "portfolio" {
   ami                    = "ami-0faab6bdbac9486fb" # Ubuntu 24.04 eu-central-1
   instance_type          = "t3.micro"
   vpc_security_group_ids = [aws_security_group.portfolio.id]
-  key_name               = "portfolio-key"
+  key_name               = aws_key_pair.portfolio.key_name
 
   user_data = <<-SHELL
     #!/bin/bash
