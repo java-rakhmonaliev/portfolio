@@ -76,81 +76,11 @@ resource "aws_instance" "portfolio" {
   vpc_security_group_ids = [aws_security_group.portfolio.id]
   key_name               = aws_key_pair.portfolio.key_name
 
-  user_data = <<-SHELL
-    #!/bin/bash
-    apt-get update -y
-    apt-get install -y python3-pip python3-venv nginx git postgresql-client
-
-    # Clone repo
-    git clone https://github.com/java-rakhmonaliev/portfolio.git /app
-    cd /app
-
-    # Python env
-    python3 -m venv .venv
-    source .venv/bin/activate
-    pip install -r requirements.txt
-
-    # Write .env
-    cat > /app/.env << 'ENVEOF'
-SECRET_KEY=${var.secret_key}
-DEBUG=False
-ALLOWED_HOSTS=java-rakhmonaliev.uz,www.java-rakhmonaliev.uz
-DB_NAME=portfolio
-DB_USER=postgres
-DB_PASSWORD=${var.db_password}
-DB_HOST=${aws_db_instance.portfolio.address}
-DB_PORT=5432
-ENVEOF
-
-    # Migrate + collectstatic
-    source .venv/bin/activate
-    python manage.py migrate
-    python manage.py collectstatic --noinput
-
-    # Gunicorn systemd service
-    cat > /etc/systemd/system/portfolio.service << 'SVCEOF'
-[Unit]
-Description=Portfolio Django App
-After=network.target
-
-[Service]
-User=ubuntu
-WorkingDirectory=/app
-EnvironmentFile=/app/.env
-ExecStart=/app/.venv/bin/gunicorn portfolio.wsgi:application --bind 127.0.0.1:8000 --workers 2
-Restart=always
-
-[Install]
-WantedBy=multi-user.target
-SVCEOF
-
-    systemctl daemon-reload
-    systemctl enable portfolio
-    systemctl start portfolio
-
-    # Nginx config
-    cat > /etc/nginx/sites-available/portfolio << 'NGINXEOF'
-server {
-    listen 80;
-    server_name java-rakhmonaliev.uz www.java-rakhmonaliev.uz;
-
-    location /static/ {
-        alias /app/staticfiles/;
-    }
-
-    location / {
-        proxy_pass http://127.0.0.1:8000;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    }
-}
-NGINXEOF
-
-    ln -s /etc/nginx/sites-available/portfolio /etc/nginx/sites-enabled/
-    rm -f /etc/nginx/sites-enabled/default
-    nginx -t && systemctl restart nginx
-  SHELL
+  user_data = templatefile("${path.module}/user_data.sh", {
+    secret_key  = var.secret_key
+    db_password = var.db_password
+    db_host     = aws_db_instance.portfolio.address
+  })
 
   tags = { Name = local.name }
 
