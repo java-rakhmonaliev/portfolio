@@ -7,7 +7,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = config("SECRET_KEY")
 DEBUG = config("DEBUG", default=False, cast=bool)
-ALLOWED_HOSTS = config("ALLOWED_HOSTS", default="localhost,127.0.0.1", cast=Csv())
+ALLOWED_HOSTS = ["java-rakhmonaliev.uz", "www.java-rakhmonaliev.uz"]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -94,6 +94,7 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-CSRF_TRUSTED_ORIGINS = config(
-    "CSRF_TRUSTED_ORIGINS", default="http://localhost,http://127.0.0.1", cast=Csv()
-)
+CSRF_TRUSTED_ORIGINS = [
+    "https://java-rakhmonaliev.uz",
+    "https://www.java-rakhmonaliev.uz",
+]
